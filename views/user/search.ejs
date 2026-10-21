@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>search</title>
+  </head>
+  <body>
+    <h1>Search Results</h1>
+    <% if (usersData.length > 0) { %>
+      <ul>
+        <% usersData.forEach(function(user) { %>
+          <li>
+            <strong>Full Name:</strong> <%= user.firstName %> <%= user.lastName %><br />
+            <strong>Email:</strong> <%= user.email %><br />
+            <strong>City:</strong> <%= user.city %><br />
+            <strong>Created At:</strong> <%= user.createdAt.toLocaleString() %><br />
+            <strong>Updated At:</strong> <%= user.updatedAt.toLocaleString() %><br />
+          </li>
+          <hr />
+        <% }); %>
+      </ul>
+    <% } else { %>
+      <p>No users found.</p>
+    <% } %>
+  </body>
+</html>
