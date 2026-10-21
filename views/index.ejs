@@ -234,11 +234,11 @@
           </li>
 
           <li>
-            <a href="./user/add.html" class="nav-link text-white">
+            <a href="./user/add" class="nav-link text-white">
               <svg class="bi pe-none me-2" width="16" height="16">
                 <use xlink:href="#people-circle" />
               </svg>
-              Add Customers
+              Add Users
             </a>
           </li>
         </ul>
@@ -277,15 +277,16 @@
             class="container-fluid justify-content-center justify-content-md-between"
           >
             <a class="navbar-brand fw-medium fs-3 mb-1 mb-md-0"
-              >Course <sup>4</sup> arab</a
+              >Node Express Project</a
             >
 
-            <form class="d-flex" role="search">
+            <form class="d-flex" role="search" action="/search" method="post">
               <input
                 class="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                name="searchField"
               />
               <button class="btn btn-outline-success" type="submit">
                 Search
@@ -294,7 +295,10 @@
           </div>
         </nav>
 
-        <table
+         <% if (usersData.length === 0) { %>
+          <div> no data available</div>
+         <% } else { %>
+            <table
           style="width: 99%"
           class="text-center mx-auto table mt-5 table-striped table-bordered"
         >
@@ -302,52 +306,36 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Full Name</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Country</th>
-              <th scope="col">Age</th>
-              <th scope="col">Last updated</th>
+              <th scope="col">Email</th>
+              <th scope="col">City</th>   
+              <th scope="col">Created At</th>           
+              <th scope="col">Updated At</th>           
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>test1</td>
-              <td>test2</td>
-              <td>@test3</td>
-              <td>@test4</td>
-              <td>@test5</td>
-              <td>
-                <a
-                  data-bs-toggle="tooltip"
-                  data-bs-title="View details"
-                  data-bs-placement="top"
-                  class="btn btn-primary btn-sm"
-                  href="./user/view.html"
-                  ><i class="bi bi-eye"></i
-                ></a>
-
-                <a
-                  data-bs-toggle="tooltip"
-                  data-bs-title="Edit user"
-                  data-bs-placement="top"
-                  class="btn btn-primary btn-sm"
-                  href="./user/edit.html"
-                >
-                  <i class="bi bi-pencil"></i>
-                </a>
-                <button
-                  data-bs-toggle="tooltip"
-                  data-bs-title="Delete user"
-                  data-bs-placement="top"
-                  class="btn btn-danger btn-sm"
-                >
-                  <i class="bi bi-trash"></i>
-                </button>
-              </td>
+           
+              
+              <% for( let index = 0; index < usersData.length; index++ ) { %>
+                <tr>
+                <td><%= index + 1 %></td>
+                <td><%= usersData[index].firstName %> <%= usersData[index].lastName %></td>
+                <td><%= usersData[index].email %></td>
+                <td><%= usersData[index].city %></td>
+                <td><%= usersData[index].createdAt.toLocaleString() %></td>
+                <td> <%= Math.floor((dateNow - usersData[index].updatedAt) / 1000 /60)  %> mins ago</td>
+                <td>
+                  <a href="/user/view/<%= usersData[index]._id %>" class="btn btn-primary">View</a>
+                  <a href="/user/edit/<%= usersData[index]._id %>" class="btn btn-warning">Edit</a>
+                  <form action="/delete/<%= usersData[index]._id %>?_method=DELETE" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+              <% } %>
             </tr>
           </tbody>
         </table>
+         <% } %>
+       
       </section>
     </main>
     <script src="./js/bootstrap.bundle.min.js"></script>
