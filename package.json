@@ -16,6 +16,7 @@
     "ejs": "^7.0.2",
     "express": "^5.3.0",
     "livereload": "^0.10.3",
+    "method-override": "^3.0.0",
     "mongoose": "^9.11.2"
   }
 }
