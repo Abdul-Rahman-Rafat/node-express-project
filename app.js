@@ -4,6 +4,19 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 const port = 3000;
+//==============================
+const mongoose = require("mongoose");
+mongoose
+  .connect(
+    "mongodb+srv://nino:yHNr92aivRzuP42@firstcluster.itf0amq.mongodb.net/?appName=FirstCluster",
+  )
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB:", err);
+  });
+//==============================
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
