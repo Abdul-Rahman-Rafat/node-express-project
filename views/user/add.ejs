@@ -39,7 +39,8 @@
         background-color: rgba(0, 0, 0, 0.1);
         border: solid rgba(0, 0, 0, 0.15);
         border-width: 1px 0;
-        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+        box-shadow:
+          inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
           inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
       }
 
@@ -224,7 +225,7 @@
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-            <a href="/" class="nav-link  text-white" aria-current="page">
+            <a href="/" class="nav-link text-white" aria-current="page">
               <svg class="bi pe-none me-2" width="16" height="16">
                 <use xlink:href="#home" />
               </svg>
@@ -250,13 +251,13 @@
             aria-expanded="false"
           >
             <img
-              src="../img/me.JPG"
+              src="/img/Pixel Me.png"
               alt=""
               width="32"
               height="32"
               class="rounded-circle me-2"
             />
-            <strong>Ali Hassan</strong>
+            <!-- <strong>Ali Hassan</strong> -->
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
             <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -275,9 +276,7 @@
           <div
             class="container-fluid justify-content-center justify-content-md-between"
           >
-            <a class="navbar-brand fw-medium fs-3 mb-1 mb-md-0"
-              >Course <sup>4</sup> arab</a
-            >
+            <a class="navbar-brand fw-medium fs-3 mb-1 mb-md-0">Add User</a>
 
             <form class="d-flex" role="search">
               <input
@@ -292,10 +291,105 @@
             </form>
           </div>
         </nav>
-
-         <h1> my  design </h1>
+        <form class="row g-3" action="/user/add" method="POST">
+          <div class="row g-3">
+            <div class="col">
+              <input
+                name="firstName"
+                type="text"
+                class="form-control"
+                placeholder="First name"
+                aria-label="First name"
+              />
+            </div>
+            <div class="col">
+              <input
+                name="lastName"
+                type="text"
+                class="form-control"
+                placeholder="Last name"
+                aria-label="Last name"
+              />
+            </div>
+          </div>
+          <div class="md:col-6">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input
+              name="email"
+              type="email"
+              class="form-control"
+              id="inputEmail4"
+            />
+          </div>
+          <div class="md:col-6">
+            <label for="inputPassword4" class="form-label">Password</label>
+            <input
+              name="password"
+              type="password"
+              class="form-control"
+              id="inputPassword4"
+            />
+          </div>
+          <div class="col-12">
+            <label for="inputAddress" class="form-label">Address</label>
+            <input
+              name="address"
+              type="text"
+              class="form-control"
+              id="inputAddress"
+              placeholder="1234 Main St"
+            />
+          </div>
+          <div class="col-12">
+            <label for="inputAddress2" class="form-label">Address 2</label>
+            <input
+              name="address2"
+              type="text"
+              class="form-control"
+              id="inputAddress2"
+              placeholder="Apartment, studio, or floor"
+            />
+          </div>
+          <div class="md:col-6">
+            <label for="inputCity" class="form-label">City</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputCity"
+              name="city"
+            />
+          </div>
+          <div class="md:col-4">
+            <label for="inputState" class="form-label">State</label>
+            <select id="inputState" class="form-control" name="state">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+          <div class="md:col-2">
+            <label for="inputZip" class="form-label">Zip</label>
+            <input type="text" class="form-control" id="inputZip" name="zip" />
+          </div>
+          <div class="col-12">
+            <div class="form-field">
+              <input
+                type="checkbox"
+                id="gridCheck"
+                class="check"
+                name="gridCheck"
+              />
+              <label for="gridCheck"> Check me out </label>
+            </div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn-solid theme-primary">
+              add user
+            </button>
+          </div>
+        </form>
       </section>
     </main>
+
     <script src="../js/bootstrap.bundle.min.js"></script>
 
     <script src="../js/sidebars.js"></script>
