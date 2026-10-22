@@ -3,14 +3,10 @@ const router = express.Router();
 
 // User schema to interact with the database
 const User = require("../models/userSchema");
+const { getAllUsers } = require("../controllers/userController");
 //routes
 ////
-router.get("/", async (req, res) => {
-  const usersData = await User.find();
-  const dateNow = new Date();
-  const name = "abdo";
-  res.render("index.ejs", { name, usersData, dateNow });
-});
+router.get("/", getAllUsers);
 ////
 router.get("/user/add", (req, res) => {
   res.render("user/add");
@@ -127,7 +123,5 @@ router.get("/user/:id", (req, res) => {
     });
 });
 ////////////////
-
-
 
 module.exports = router;
