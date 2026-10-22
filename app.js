@@ -1,30 +1,36 @@
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 3000;
 
+const express = require("express");
+const path = require("path");
+const methodOverride = require("method-override");
+
+const app = express();
 const allRoutes = require("./routes/allRoutes");
 
+
+const connectDB = require("./db");
+
+// View engine
 app.set("view engine", "ejs");
-app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies (as sent by HTML forms)
-const methodOverride = require("method-override");
-app.use(methodOverride("_method")); // Override with POST having ?_method=DELETE or ?_method=PUT
+app.set("views", path.join(__dirname, "views"));
 
-//==============================
-const mongoose = require("mongoose");
-mongoose
-  .connect(
-    "mongodb+srv://nino:yHNr92aivRzuP42@firstcluster.itf0amq.mongodb.net/?appName=FirstCluster",
-  )
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.error("Error connecting to MongoDB:", err);
-  });
-//==============================
+// Middlewares
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
-//==========================
+// Ensure MongoDB is connected before handling requests
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    res.status(503).send("Database is temporarily unavailable");
+  }
+});
 
-app.listen(port, () => {});
+// Routes
 app.use("/", allRoutes);
+
+// Export Express app for Vercel
+module.exports = app;
