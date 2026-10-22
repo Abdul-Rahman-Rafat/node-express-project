@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const port = process.env.PORT || 3000;
 
 const allRoutes = require("./routes/allRoutes");
 
@@ -25,6 +26,5 @@ mongoose
 
 //==========================
 
-app.listen(3000, () => {
-});
+app.listen(port, () => {});
 app.use("/", allRoutes);
